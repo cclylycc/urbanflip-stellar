@@ -1,0 +1,69 @@
+=== Urbanflip x Stellar: testnet proof ===
+
+[1/8] Fondeando cuentas base via friendbot (platform, issuer, treasury, invB, invC)...
+  -> Platform account: https://stellar.expert/explorer/testnet/account/GATUVC66WXCZVRWMMMUUQWN4QWASUAWE2YBXKS3SUP2RRHECUSV5L6OB
+  -> Issuer (operacion MADRID-1): https://stellar.expert/explorer/testnet/account/GBBFSTYYMKM63SO6KKFO4EPVP7O7CBDKMUID2KGBDF76RCFNDBCKJG3L
+
+[2/8] Fijando flags de compliance en el emisor ANTES de cualquier trustline...
+  -> SetOptions: AUTH_REQUIRED + AUTH_REVOCABLE + AUTH_CLAWBACK_ENABLED + home_domain: https://stellar.expert/explorer/testnet/tx/991ecc71c0e52f1b72ab77a1e8698f1a52424f2e65adfb96fae135e323e3c042
+
+[3/8] Creando cuenta del inversor A PATROCINADA (CAP-33): el inversor nunca compra XLM...
+  -> Cuenta invA creada con reservas y trustlines patrocinados: https://stellar.expert/explorer/testnet/tx/160110214572d9ed82d513ec993025e368047292a926fc2a1094cbf2d7540276
+
+[4/8] Trustlines de invB (fee pagado por la plataforma via FEE-BUMP) y de invC...
+  -> Fee-bump: platform paga los fees del trustline de invB: https://stellar.expert/explorer/testnet/tx/c5e856f3fcc53093629e8c8b59d602b445c92025a2f80754b69fdc0bfa69d635
+  -> Trustline de invC (existira, pero NO sera autorizado): https://stellar.expert/explorer/testnet/tx/a15a1173773be7eb4fb4b3d827298b0f4ab4d26fb4a42a22bc807e252bf393c4
+
+[5/8] Autorizando SOLO a los inversores con KYC aprobado (invA, invB)...
+  -> Trustlines autorizados tras KYC (invA, invB): https://stellar.expert/explorer/testnet/tx/c3b8bf3f8a566b0ddb0cbb6403596284294e9fd3757d9b303b39f4bb47283a2f
+
+[6/8] Intentando emitir participaciones a invC (SIN KYC): debe FALLAR a nivel de protocolo...
+  OK: rechazado por el protocolo (["op_not_authorized"])
+  (Este rechazo es la prueba de que la compliance vive en el protocolo, no en nuestro backend.)
+
+[7/8] Emitiendo participaciones a los inversores autorizados (pro-rata de ejemplo)...
+  -> Emision UFMADRID1 a invA (150k) e invB (100k): https://stellar.expert/explorer/testnet/tx/019b7ec53a57579b360ba1c2d335876ec7a2d94c6c22dc61950110e895615e29
+  -> Asset UFMADRID1: https://stellar.expert/explorer/testnet/asset/UFMADRID1-GBBFSTYYMKM63SO6KKFO4EPVP7O7CBDKMUID2KGBDF76RCFNDBCKJG3L
+
+[8/8] Batch de distribucion en USDC: 1 transaccion, N pagos (el patron que SDP ejecuta en produccion)...
+  -> Batch USDC: distribucion pro-rata a 2 inversores en una tx atomica: https://stellar.expert/explorer/testnet/tx/42fb26b5199902e442852c5922815f11f655cf978793bf48caefecfeebd9d7bb
+
+[extra] Clawback regulatorio: recuperando la posicion de invB (offboarding)...
+  -> Clawback de UFMADRID1 desde invB: https://stellar.expert/explorer/testnet/tx/d3a1a708282bd962ce7058445dcf524a6dd7ee43e59282979209896c8b730d41
+
+=== COMPLETADO ===
+
+Enlaces para la submission (stellar.expert, testnet):
+
+- Platform account
+  https://stellar.expert/explorer/testnet/account/GATUVC66WXCZVRWMMMUUQWN4QWASUAWE2YBXKS3SUP2RRHECUSV5L6OB
+- Issuer (operacion MADRID-1)
+  https://stellar.expert/explorer/testnet/account/GBBFSTYYMKM63SO6KKFO4EPVP7O7CBDKMUID2KGBDF76RCFNDBCKJG3L
+- SetOptions: AUTH_REQUIRED + AUTH_REVOCABLE + AUTH_CLAWBACK_ENABLED + home_domain
+  https://stellar.expert/explorer/testnet/tx/991ecc71c0e52f1b72ab77a1e8698f1a52424f2e65adfb96fae135e323e3c042
+- Cuenta invA creada con reservas y trustlines patrocinados
+  https://stellar.expert/explorer/testnet/tx/160110214572d9ed82d513ec993025e368047292a926fc2a1094cbf2d7540276
+- Fee-bump: platform paga los fees del trustline de invB
+  https://stellar.expert/explorer/testnet/tx/c5e856f3fcc53093629e8c8b59d602b445c92025a2f80754b69fdc0bfa69d635
+- Trustline de invC (existira, pero NO sera autorizado)
+  https://stellar.expert/explorer/testnet/tx/a15a1173773be7eb4fb4b3d827298b0f4ab4d26fb4a42a22bc807e252bf393c4
+- Trustlines autorizados tras KYC (invA, invB)
+  https://stellar.expert/explorer/testnet/tx/c3b8bf3f8a566b0ddb0cbb6403596284294e9fd3757d9b303b39f4bb47283a2f
+- Emision UFMADRID1 a invA (150k) e invB (100k)
+  https://stellar.expert/explorer/testnet/tx/019b7ec53a57579b360ba1c2d335876ec7a2d94c6c22dc61950110e895615e29
+- Asset UFMADRID1
+  https://stellar.expert/explorer/testnet/asset/UFMADRID1-GBBFSTYYMKM63SO6KKFO4EPVP7O7CBDKMUID2KGBDF76RCFNDBCKJG3L
+- Batch USDC: distribucion pro-rata a 2 inversores en una tx atomica
+  https://stellar.expert/explorer/testnet/tx/42fb26b5199902e442852c5922815f11f655cf978793bf48caefecfeebd9d7bb
+- Clawback de UFMADRID1 desde invB
+  https://stellar.expert/explorer/testnet/tx/d3a1a708282bd962ce7058445dcf524a6dd7ee43e59282979209896c8b730d41
+
+Guarda tambien las claves publicas por si el equipo quiere ampliar la demo:
+  PLATFORM: GATUVC66WXCZVRWMMMUUQWN4QWASUAWE2YBXKS3SUP2RRHECUSV5L6OB
+  ISSUER:   GBBFSTYYMKM63SO6KKFO4EPVP7O7CBDKMUID2KGBDF76RCFNDBCKJG3L
+  TREASURY: GAICUWZAN5HHAG67COFWF4CL2DCCMAB3NOS7HELSSUTWM52KN4W7H4P4
+  INV_A:    GDZA665PEBRG6JU4HX7PYH5LAZDU6S3GBES4BRHKWZIPFWTHQCYZ4KEB
+  INV_B:    GBB2KOKHGWBNVXFWQRJKOKBBCHDQC7IONJ3VNNI6KSDGHTTVKFDQQGGY
+  INV_C:    GCQN2LHA3AILT6UGP56FLHGN7GYDRKSVCC2J73FRKDD75TYHSZAXB5ME
+
+[Secret keys removed before publishing. Testnet-only, disposable keypairs.]
